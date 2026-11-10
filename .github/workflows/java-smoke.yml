@@ -1,0 +1,31 @@
+name: Java smoke checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  compile-and-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Compile sources and smoke tests
+        run: javac -d out *.java tests/ReminderSmokeTest.java
+
+      - name: Run headless smoke tests
+        run: java -Djava.awt.headless=true -cp out AutomatedReminder.ReminderSmokeTest

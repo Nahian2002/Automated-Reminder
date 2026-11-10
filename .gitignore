@@ -1,0 +1,15 @@
+# User-specific data: reminders.txt includes absolute local folder paths.
+reminders.txt
+
+# Java compiler and common build output
+*.class
+/out/
+/build/
+/target/
+
+# IDE metadata and operating-system files
+.idea/
+*.iml
+.vscode/
+.DS_Store
+Thumbs.db
